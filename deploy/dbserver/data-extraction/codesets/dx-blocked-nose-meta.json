@@ -1,0 +1,23 @@
+{
+  "name": "Blocked nose",
+  "description": "Code for a blocked nose",
+  "includeTerms": [
+    "blocked nose",
+    "sinusitis",
+    "antritis",
+    "pansinusitis",
+    "acute rhinosinusitis"
+  ],
+  "excludeTerms": [
+    "blocked nose lozenges",
+    "recurrent sinusitis",
+    "chronic"
+  ],
+  "terminology": "Readv2",
+  "createdBy": {
+    "name": "Richard Williams",
+    "email": "1234richardwilliams@gmail.com"
+  },
+  "createdOn": "2020-03-26T11:44:19.163Z",
+  "lastUpdated": "2020-03-30T15:59:32.912Z"
+}

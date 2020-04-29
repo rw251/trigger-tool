@@ -1,0 +1,17 @@
+1C86.00	Blocked nose
+H01..00	Acute sinusitis
+H01..11	Sinusitis
+H010.00	Acute maxillary sinusitis
+H010.11	Antritis - acute
+H011.00	Acute frontal sinusitis
+H012.00	Acute ethmoidal sinusitis
+H013.00	Acute sphenoidal sinusitis
+H014.00	Acute rhinosinusitis
+H01y.00	Other acute sinusitis
+H01y000	Acute pansinusitis
+H01yz00	Other acute sinusitis NOS
+H01z.00	Acute sinusitis NOS
+H130.12	Maxillary sinusitis
+H131.11	Frontal sinusitis
+H13y100	Pansinusitis
+Hyu0000	[X]Other acute sinusitis
