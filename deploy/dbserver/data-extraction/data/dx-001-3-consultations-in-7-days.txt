@@ -1,0 +1,45 @@
+EHR,GPCode, PracticeName, PracticeListSize, Events-3-in-7, Patients-3-in-7, Events-4-in-7, Patients-4-in-7, Events-5-in-7, Patients-5-in-7, Events-6-in-7, Patients-6-in-7, Events-7-in-7, Patients-7-in-7
+Vision,P87002,Poplars,11411,307,163,91,24,47,6,20,1,7,1
+Vision,P87003,St Andrews (Lindsay),3968,433,263,46,39,0,0,0,0,0,0
+Vision,P87004,Salford Medical Centre (Salim),3598,75,49,12,7,0,0,0,0,0,0
+EMIS Web,P87008,Walkden Medical Centre,8154,2311,1011,589,303,117,72,12,8,2,1
+Vision,P87014,Irlam Group Practice,3898,1272,524,341,140,79,39,10,5,1,1
+Vision,P87015,Pendleton Gateway (Austin),3496,20,12,5,2,1,1,0,0,0,0
+Vision,P87016,The Sides,12873,5526,1984,1694,722,387,195,52,27,0,0
+EMIS Web,P87017,The Limes,5201,2152,818,623,288,131,56,25,14,0,0
+Vision,P87019,Silverdale Medical Practice,12190,6641,2034,2261,845,577,248,58,31,1,1
+Vision,P87020,St Andrews (Budden),6445,167,111,19,9,2,1,0,0,0,0
+Vision,P87022,Mocha Parade,2008,189,100,36,17,10,6,0,0,0,0
+Vision,P87024,Springfield Medical Centre,10149,6176,1968,2078,857,523,242,88,47,3,3
+EMIS Web,P87025,The Lakes,9449,4113,1432,1236,530,248,134,31,18,4,2
+Vision,P87026,Newbury Green,11235,112,69,15,10,1,1,0,0,0,0
+Vision,P87027,Langworthy Medical Centre,17918,4386,1558,1135,485,168,92,4,4,0,0
+EMIS Web,P87028,The Gill,6772,2386,866,773,321,193,89,27,17,0,0
+Vision,P87032,Orient Road Medical Practice,5350,33,23,5,2,1,1,0,0,0,0
+Vision,P87035,Ordsall Health Centre,10022,1196,595,256,143,34,24,1,1,0,0
+Vision,P87036,Lower Broughton Health Centre (Sultan),1561,46,23,12,4,2,1,0,0,0,0
+Vision,P87039,Irlam Medical Centre,4076,550,299,94,60,13,7,1,1,0,0
+Vision,P87040,Sorrell Group Practice,8926,55,31,16,8,3,2,0,0,0,0
+Vision,P87610,Mosslands Medical Centre,8976,1241,561,300,139,62,21,6,1,0,0
+EMIS Web,P87613,Cleggs Lane Medical Practice,3374,630,318,146,76,30,15,7,5,0,0
+EMIS Web,P87618,Dr Y Loomba & Partners,2037,523,221,124,61,27,15,5,3,0,0
+Vision,P87620,Monton Medical Centre,8946,480,296,62,44,4,3,0,0,0,0
+EMIS Web,P87624,Ellenbrook Medical Centre,5117,1421,606,346,185,53,39,3,2,0,0
+EMIS Web,P87625,Dearden Avenue,2343,704,309,161,83,47,25,2,2,0,0
+EMIS Web,P87627,Orchard Medical Centre,2992,575,239,134,65,34,15,2,1,0,0
+EMIS Web,P87630,Cherry Medical Centre,2816,1146,436,309,152,57,29,3,2,0,0
+EMIS Web,P87634,Clarendon Surgery,9631,5512,1722,1891,706,507,220,82,31,8,3
+Vision,P87639,Cornerstone Medical Practice,2986,132,74,18,12,1,1,0,0,0,0
+EMIS Web,P87649,Chapel Medical Centre,2703,647,295,147,83,19,11,2,2,0,0
+Vision,P87651,Limefield Road Medical Practice,5456,28,21,7,2,2,1,0,0,0,0
+Vision,P87652,Lower Broughton Health Centre (Buch),1993,59,38,11,7,3,3,0,0,0,0
+Vision,P87654,Lower Broughton Health Centre (Jeet),5543,201,131,28,23,0,0,0,0,0,0
+Vision,P87657,Salford Care Centre Irlam,2802,904,339,197,93,30,18,0,0,0,0
+EMIS Web,P87658,The Willows,3192,807,352,188,100,43,25,3,3,0,0
+Vision,P87659,St Andrews Medical Centre (Yates),3828,237,145,36,24,8,4,0,0,0,0
+Vision,P87660,Eccles Gateway,2493,6,5,0,0,0,0,0,0,0,0
+Vision,P87661,Manchester Road East Medical Practice,2138,318,177,60,36,3,2,1,1,0,0
+Vision,Y00445,Salford Health Matters,16806,357,190,76,37,11,6,1,1,0,0
+Vision,Y02622,Blackfriars,10769,2134,962,498,274,66,48,3,3,0,0
+Vision,Y02625,Care Homes Medical Practice,1043,4832,764,1885,441,498,159,72,32,5,2
+Unknown,Y02767,The Heights Practice,5274,1551,612,430,192,101,44,15,7,0,0
