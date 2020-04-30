@@ -1,12 +1,18 @@
 const { 
   createSqlQueries,
-  processRawDataFiles, 
+  processRawDataFiles,
+  sqlDateStringFromDate,
   // getTableOfResults, 
   // drawIndividualBarCharts,
   // drawIndividualLineCharts,
 } = require('./utils');
 
-createSqlQueries();
+const reportDateString = process.argv[2] || sqlDateStringFromDate();
+const reportDateMinus3Months = new Date(reportDateString);
+reportDateMinus3Months.setMonth(reportDateMinus3Months.getMonth() - 3);
+const reportDateMinus3MonthsString = sqlDateStringFromDate(reportDateMinus3Months);
 
-const data = processRawDataFiles();
-console.log(data);
+createSqlQueries({reportDateString, reportDateMinus3MonthsString});
+
+// const data = processRawDataFiles();
+// console.log(data);

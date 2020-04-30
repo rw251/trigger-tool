@@ -1,7 +1,7 @@
 const { readdirSync, readFileSync, writeFileSync, createWriteStream } = require('fs');
 const { join } = require('path');
-const Chart = require('chart.js');
-const { createCanvas } = require('canvas')
+// const Chart = require('chart.js');
+// const { createCanvas } = require('canvas')
 
 let output;
 let ageMarkers = [5]; // e.g. [5,15,39] would give 0-4, 5-14, 15-38, 39+
@@ -66,42 +66,49 @@ const codesWithoutTermCode = (codes) => {
   return codes.concat(codesWithoutTermExtension);
 }
 
-exports.createSqlQueries = () => {
-  const template = readFileSync(join(__dirname, 'sql-queries', 'template.sql'), 'utf8');
+const getDxNames = (filename) => {
+  const dxDashed = filename.split('.')[0].replace('dx-','');
+  const dxCapitalCase = dxDashed.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join('');
+  const dxLowerSpaced = dxDashed.split('-').map(x => x.toLowerCase()).join(' ');
+  return { dxDashed, dxCapitalCase, dxLowerSpaced };
+}
+
+const loadCodeSets = () => {
+  const codesets = {};
   readdirSync(join(__dirname, 'codesets'))
     .filter(x => {
       if(x.indexOf('.json') > -1) return false; // don't want the metadata
       return true;
     })
     .map(filename => {
-      const symptomDashed = filename.split('.')[0].replace('dx-','');
-      const symptomCapitalCase = symptomDashed.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join('');
-      const symptomLowerSpaced = symptomDashed.split('-').map(x => x.toLowerCase()).join(' ');
-      const codes = codesFromFile(join(__dirname, 'data-extraction', 'codesets', filename));
+      const {dxDashed, dxCapitalCase, dxLowerSpaced} = getDxNames(filename);      
+      const codes = codesFromFile(join(__dirname, 'codesets', filename));
       const allCodes = codesWithoutTermCode(codes);
       const codeString = allCodes.join("','");
-      let query = template.replace(/\{\{SYMPTOM_LOWER_SPACED\}\}/g, symptomLowerSpaced);
-      query = query.replace(/\{\{SYMPTOM_CAPITAL_NO_SPACE\}\}/g, symptomCapitalCase);
-      query = query.replace(/\{\{SYMPTOM_DASHED\}\}/g, symptomDashed);
-      query = query.replace(/\{\{CLINICAL_CODES\}\}/g, codeString);
-      const ageQueryBase = query.slice(0);
-      query = query.replace(/\{\{!AGE\}\}[\s\S]*\{\{AGE\}\}/,"");
-      query = query.replace(/\{\{.?MAIN\}\}/g,"");
-      writeFileSync(join(__dirname, 'data-extraction', 'sql-queries', `dxs-${symptomDashed}.sql`), query);
-      // age queries
-      let lowerAge = 0;
-      ageMarkers.forEach(ageMarker => {
-        let ageBase = ageQueryBase.replace(/\{\{!MAIN\}\}[\s\S]*\{\{MAIN\}\}/,"");
-        ageBase = ageBase.replace(/\{\{.?AGE\}\}/g,"");
-        ageBase = ageBase.replace(/\{\{LOWER_AGE\}\}/g, lowerAge);
-        ageBase = ageBase.replace(/\{\{UPPER_AGE\}\}/g, ageMarker);
-        writeFileSync(join(__dirname, 'data-extraction', 'sql-queries', `dxs-${symptomDashed}-age-${lowerAge}-${ageMarker}.sql`), ageBase);
-        lowerAge = ageMarker;
-      });
-      let ageBase = ageQueryBase.replace(/\{\{!MAIN\}\}[\s\S]*\{\{MAIN\}\}/,"");
-      ageBase = ageBase.replace(/\{\{.?AGE\}\}/g,"");
-      ageBase = ageBase.replace(/\{\{LOWER_AGE\}\}/g, lowerAge);
-      ageBase = ageBase.replace(/\{\{UPPER_AGE\}\}/g, 120);
-      writeFileSync(join(__dirname, 'data-extraction', 'sql-queries', `dxs-${symptomDashed}-age-${lowerAge}-.sql`), ageBase);
-    })
+      codesets[dxCapitalCase] = codeString;
+    });
+  return codesets;
+}
+
+const loadSQLTemplates = () => readdirSync(join(__dirname, 'triggers'))
+    .map(filename => {
+      const template = readFileSync(join(__dirname, 'triggers', filename), 'utf8');
+      return {name: filename.split('.')[0], template};
+    });
+
+const createAndWriteSQLFile = ({template, codesets, name, reportDateString, reportDateMinus3MonthsString}) => {
+  let query = template.replace(/\{\{REPORT_DATE_MINUS_3_MONTHS\}\}/g, reportDateMinus3MonthsString);
+  query = query.replace(/\{\{REPORT_DATE\}\}/g, reportDateString);
+  writeFileSync(join(__dirname, 'sql-queries', `dx-${name}.sql`), query);  
 };
+
+exports.createSqlQueries = ({reportDateString, reportDateMinus3MonthsString}) => {
+  const codesets = loadCodeSets();
+  const templates = loadSQLTemplates();
+
+  templates.forEach((template) => {
+    createAndWriteSQLFile({codesets, reportDateString, reportDateMinus3MonthsString, ...template});
+  });
+};
+
+exports.sqlDateStringFromDate = (date = new Date()) => date.toISOString().substr(0,10);
