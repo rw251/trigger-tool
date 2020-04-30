@@ -3,8 +3,8 @@ SET NOCOUNT ON;
 
 --Get all encounters in the last 3 months
 SELECT PatID, EntryDate INTO #Encounters FROM SIR_ALL_Records
-WHERE EntryDate > '2019-05-29'
-AND EntryDate <= '2019-08-29'
+WHERE EntryDate > '2020-01-30'
+AND EntryDate <= '2020-04-30'
 AND ReadCode = '~ENCT' 
 AND LOWER(Rubric) LIKE '%consultation%'
 AND Rubric NOT LIKE 'Non%'
