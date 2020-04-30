@@ -8,8 +8,8 @@ let ageMarkers = [5]; // e.g. [5,15,39] would give 0-4, 5-14, 15-38, 39+
 
 const resetOutput = () => {
   output = {
-    yearCounts: {},
-    weekCounts: {},
+    // yearCounts: {},
+    // weekCounts: {},
   };
 }
 
@@ -19,31 +19,47 @@ const getStartOfWeek = (dateString) => {
   return date;
 }
 
+const getTable = (name) => {
+  return `
+  <h2>${name} (${output[name].reportDate})</h2>
+  <table class="table table-sm">
+    <caption>${name}</caption>
+    <thead>
+      <tr>
+        ${output[name].headers.map(header => `<th>${header}</th>`).join('')}
+      </tr>
+    </thead>
+    <tbody>
+      ${output[name].body
+        .filter(row => row.length > 2)
+        .map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}
+    </tbody>
+  </table>`
+}
+
+const getTables = () => Object.keys(output).map(getTable);
+const getHTML = () => {
+  const htmlTemplate = readFileSync(join(__dirname, 'html-templates', 'wrapper.html'), 'utf8');
+  const html = htmlTemplate.replace('{{CONTENT}}', getTables());
+  return html;
+};
+exports.writeHTML = () => writeFileSync(join(__dirname, 'output', 'results.html'), getHTML());
+
 const processDataFile = (filename) => {
-  const trigger = filename.replace('trigger-', '').split('.')[0];
-  output.yearCounts[symptom] = {};
-  output.weekCounts[symptom] = {};
-  readFileSync(join('data-extraction', 'data', filename), 'utf8')
+  const trigger = filename.replace(/trigger-[0-9]{3}-/, '').split('.')[0];
+  output[trigger] = { body: [] };
+  readFileSync(join(__dirname, 'data', filename), 'utf8')
     .split('\n')
-    .slice(1)
-    .forEach(line => {
-      const [dateString, count] = line.trim().replace('/\r/g','').split(',');
-      if(!dateString) return;
-      const date = new Date(dateString);
-      const year = date.getFullYear();
-      const startOfWeek = getStartOfWeek(dateString);
-      let startOfWeekYear = startOfWeek.getFullYear();
-      if(startOfWeekYear === 1999) return;
-      if(!output.weekCounts[symptom][startOfWeekYear]) {
-        output.weekCounts[symptom][startOfWeekYear] = {};
+    .forEach((line, i) => {
+      if(i === 0) {
+        // Report date
+        output[trigger].reportDate = line.split(':')[1].trim();
+      } else if (i === 1) {
+        // Headers
+        output[trigger].headers = line.split(',');
+      } else {
+        output[trigger].body.push(line.split(','));
       }
-      if(!output.weekCounts[symptom][startOfWeekYear][startOfWeek.getTime()]) {
-        output.weekCounts[symptom][startOfWeekYear][startOfWeek.getTime()] = 0;
-      }
-      output.weekCounts[symptom][startOfWeekYear][startOfWeek.getTime()] += +count;
-      if(date.getMonth()<7) return;
-      if(!output.yearCounts[symptom][year]) output.yearCounts[symptom][year] = 0;
-      output.yearCounts[symptom][year] += +count;
     });
 }
 

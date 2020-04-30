@@ -2,6 +2,7 @@ const {
   createSqlQueries,
   processRawDataFiles,
   sqlDateStringFromDate,
+  writeHTML,
   // getTableOfResults, 
   // drawIndividualBarCharts,
   // drawIndividualLineCharts,
@@ -14,5 +15,5 @@ const reportDateMinus3MonthsString = sqlDateStringFromDate(reportDateMinus3Month
 
 createSqlQueries({reportDateString, reportDateMinus3MonthsString});
 
-// const data = processRawDataFiles();
-// console.log(data);
+const data = processRawDataFiles();
+writeHTML();

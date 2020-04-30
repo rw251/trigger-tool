@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run data-extraction",
+    "poststart": "npm run open",
+    "open": "start deploy/dbserver/data-extraction/output/results.html",
     "data-extraction": "node deploy/dbserver/data-extraction/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
