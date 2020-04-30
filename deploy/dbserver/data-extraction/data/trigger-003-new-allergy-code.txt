@@ -1,0 +1,39 @@
+Report date: 2020-04-30
+EHR,GPCode, PracticeName, PracticeListSize, Events, Patients
+Vision,P87002,Poplars,11411,4,4
+Vision,P87003,St Andrews (Lindsay),3968,3,1
+Vision,P87004,Salford Medical Centre (Salim),3598,4,4
+EMIS Web,P87008,Walkden Medical Centre,8154,19,15
+Vision,P87014,Irlam Group Practice,3898,10,10
+Vision,P87016,The Sides,12873,96,69
+EMIS Web,P87017,The Limes,5201,7,4
+Vision,P87019,Silverdale Medical Practice,12190,53,45
+Vision,P87020,St Andrews (Budden),6445,1,1
+Vision,P87022,Mocha Parade,2008,1,1
+Vision,P87024,Springfield Medical Centre,10149,27,23
+EMIS Web,P87025,The Lakes,9449,1,1
+Vision,P87026,Newbury Green,11235,11,9
+Vision,P87027,Langworthy Medical Centre,17918,3,3
+EMIS Web,P87028,The Gill,6772,101,77
+Vision,P87035,Ordsall Health Centre,10022,1,1
+Vision,P87039,Irlam Medical Centre,4076,1,1
+Vision,P87040,Sorrell Group Practice,8926,2,2
+Vision,P87610,Mosslands Medical Centre,8976,2,2
+EMIS Web,P87613,Cleggs Lane Medical Practice,3374,4,2
+EMIS Web,P87618,Dr Y Loomba & Partners,2037,6,4
+Vision,P87620,Monton Medical Centre,8946,1,1
+EMIS Web,P87624,Ellenbrook Medical Centre,5117,23,17
+EMIS Web,P87625,Dearden Avenue,2343,3,3
+EMIS Web,P87627,Orchard Medical Centre,2992,1,1
+EMIS Web,P87630,Cherry Medical Centre,2816,9,7
+EMIS Web,P87634,Clarendon Surgery,9631,37,30
+Vision,P87639,Cornerstone Medical Practice,2986,1,1
+EMIS Web,P87649,Chapel Medical Centre,2703,6,6
+Vision,P87654,Lower Broughton Health Centre (Jeet),5543,3,3
+Vision,P87657,Salford Care Centre Irlam,2802,1,1
+EMIS Web,P87658,The Willows,3192,5,5
+Vision,P87660,Eccles Gateway,2493,1,1
+Vision,Y00445,Salford Health Matters,16806,1,1
+Vision,Y02622,Blackfriars,10769,21,18
+Vision,Y02625,Care Homes Medical Practice,1043,56,32
+Unknown,Y02767,The Heights Practice,5274,3,3
