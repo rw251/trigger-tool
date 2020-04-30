@@ -20,7 +20,7 @@ const getStartOfWeek = (dateString) => {
 }
 
 const processDataFile = (filename) => {
-  const symptom = filename.replace('dxs-', '').split('.')[0];
+  const trigger = filename.replace('trigger-', '').split('.')[0];
   output.yearCounts[symptom] = {};
   output.weekCounts[symptom] = {};
   readFileSync(join('data-extraction', 'data', filename), 'utf8')
@@ -47,9 +47,9 @@ const processDataFile = (filename) => {
     });
 }
 
-exports.processRawDataFiles = (directory = './data-extraction/data') => {
+exports.processRawDataFiles = () => {
   resetOutput();
-  readdirSync(directory)
+  readdirSync(join(__dirname, 'data'))
     .filter(x => x.indexOf('.txt') > -1)
     .forEach(file => processDataFile(file));
   return output;
@@ -66,11 +66,11 @@ const codesWithoutTermCode = (codes) => {
   return codes.concat(codesWithoutTermExtension);
 }
 
-const getDxNames = (filename) => {
-  const dxDashed = filename.split('.')[0].replace('dx-','');
-  const dxCapitalCase = dxDashed.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join('');
-  const dxLowerSpaced = dxDashed.split('-').map(x => x.toLowerCase()).join(' ');
-  return { dxDashed, dxCapitalCase, dxLowerSpaced };
+const getTriggerNames = (filename) => {
+  const triggerDashed = filename.split('.')[0].replace('trigger-','');
+  const triggerCapitalCase = triggerDashed.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join('');
+  const triggerLowerSpaced = triggerDashed.split('-').map(x => x.toLowerCase()).join(' ');
+  return { triggerDashed, triggerCapitalCase, triggerLowerSpaced };
 }
 
 const loadCodeSets = () => {
@@ -81,11 +81,11 @@ const loadCodeSets = () => {
       return true;
     })
     .map(filename => {
-      const {dxDashed, dxCapitalCase, dxLowerSpaced} = getDxNames(filename);      
+      const {triggerDashed, triggerCapitalCase, triggerLowerSpaced} = getTriggerNames(filename);      
       const codes = codesFromFile(join(__dirname, 'codesets', filename));
       const allCodes = codesWithoutTermCode(codes);
       const codeString = allCodes.join("','");
-      codesets[dxCapitalCase] = codeString;
+      codesets[triggerCapitalCase] = codeString;
     });
   return codesets;
 }
@@ -99,7 +99,7 @@ const loadSQLTemplates = () => readdirSync(join(__dirname, 'triggers'))
 const createAndWriteSQLFile = ({template, codesets, name, reportDateString, reportDateMinus3MonthsString}) => {
   let query = template.replace(/\{\{REPORT_DATE_MINUS_3_MONTHS\}\}/g, reportDateMinus3MonthsString);
   query = query.replace(/\{\{REPORT_DATE\}\}/g, reportDateString);
-  writeFileSync(join(__dirname, 'sql-queries', `dx-${name}.sql`), query);  
+  writeFileSync(join(__dirname, 'sql-queries', `trigger-${name}.sql`), query);  
 };
 
 exports.createSqlQueries = ({reportDateString, reportDateMinus3MonthsString}) => {
