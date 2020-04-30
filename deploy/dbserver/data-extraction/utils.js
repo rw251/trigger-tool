@@ -13,12 +13,6 @@ const resetOutput = () => {
   };
 }
 
-const getStartOfWeek = (dateString) => {
-  const date = new Date(dateString);
-  date.setDate(date.getDate() + 1 - (date.getDay() || 7));
-  return date;
-}
-
 const getTable = (name) => {
   return `
   <h2>${name} (${output[name].reportDate})</h2>
@@ -38,11 +32,13 @@ const getTable = (name) => {
 }
 
 const getTables = () => Object.keys(output).map(getTable);
+
 const getHTML = () => {
   const htmlTemplate = readFileSync(join(__dirname, 'html-templates', 'wrapper.html'), 'utf8');
   const html = htmlTemplate.replace('{{CONTENT}}', getTables());
   return html;
 };
+
 exports.writeHTML = () => writeFileSync(join(__dirname, 'output', 'results.html'), getHTML());
 
 const processDataFile = (filename) => {
@@ -72,6 +68,7 @@ exports.processRawDataFiles = () => {
 }
 
 const codesFromFile = (pathToFile) => readFileSync(pathToFile, 'utf8')
+  .replace(/\r/g,'')
   .split('\n')
   .map(x => x.split('\t')[0]);
 
@@ -100,7 +97,7 @@ const loadCodeSets = () => {
       const {triggerDashed, triggerCapitalCase, triggerLowerSpaced} = getTriggerNames(filename);      
       const codes = codesFromFile(join(__dirname, 'codesets', filename));
       const allCodes = codesWithoutTermCode(codes);
-      const codeString = allCodes.join("','");
+      const codeString = `'${allCodes.join("','")}'`;
       codesets[triggerCapitalCase] = codeString;
     });
   return codesets;
@@ -115,6 +112,11 @@ const loadSQLTemplates = () => readdirSync(join(__dirname, 'triggers'))
 const createAndWriteSQLFile = ({template, codesets, name, reportDateString, reportDateMinus3MonthsString}) => {
   let query = template.replace(/\{\{REPORT_DATE_MINUS_3_MONTHS\}\}/g, reportDateMinus3MonthsString);
   query = query.replace(/\{\{REPORT_DATE\}\}/g, reportDateString);
+  while(query.indexOf('{{CODESET:') > -1) {
+    const codeset = query.match(/\{\{CODESET:([^}]+)\}\}/)[1];
+    const codesetRegex = new RegExp(`\{\{CODESET:${codeset}\}\}`, 'g');
+    query = query.replace(codesetRegex, codesets[codeset]);
+  }
   writeFileSync(join(__dirname, 'sql-queries', `trigger-${name}.sql`), query);  
 };
 

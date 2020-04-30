@@ -83,7 +83,7 @@ group by gpcode;
 
 --Get results
 PRINT 'Report date: {{REPORT_DATE}}'
-PRINT 'EHR,GPCode, PracticeName, PracticeListSize, Events-3-in-7, Patients-3-in-7, Events-4-in-7, Patients-4-in-7, Events-5-in-7, Patients-5-in-7, Events-6-in-7, Patients-6-in-7, Events-7-in-7, Patients-7-in-7'
+PRINT 'EHR,GPCode, PracticeName, PracticeListSize, Evts-3-in-7, Pats-3-in-7, Evts-4-in-7, Pats-4-in-7, Evts-5-in-7, Pats-5-in-7, Evts-6-in-7, Pats-6-in-7, Evts-7-in-7, Pats-7-in-7'
 select ehr, a.gpcode, practiceName, practiceListSize, a.num as occurances, b.num as patients, ISNULL(e4.num,0) as events4, ISNULL(p4.num,0) as patients4, ISNULL(e5.num,0) as events5, ISNULL(p5.num,0) as patients5, ISNULL(e6.num,0) as events6, ISNULL(p6.num,0) as patients6, ISNULL(e7.num,0) as events7, ISNULL(p7.num,0) as patients7
 from #EncountersPerPractice a 
 inner join #PatientsPerPractice b on a.gpcode = b.gpcode
