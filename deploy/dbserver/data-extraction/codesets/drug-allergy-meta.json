@@ -7,17 +7,26 @@
     "rivaroxaban allergy",
     "ticagrelor allergy",
     "prasugrel allergy",
-    "aliskiren allergy"
+    "aliskiren allergy",
+    "adverse reaction",
+    "allergic drug reaction",
+    "drug hypersensitivity",
+    "drug idiosyncrasy",
+    "adverse effect* in therapeutic use",
+    "yellow card drug react",
+    "adverse effect of pramipexole"
   ],
   "excludeTerms": [
     "h/o",
-    "personal history"
+    "personal history",
+    "adverse food reaction",
+    "scoline apnoea"
   ],
   "terminology": "Readv2",
   "createdBy": {
     "name": "Richard Williams",
     "email": "1234richardwilliams@gmail.com"
   },
-  "createdOn": "2020-04-30T15:23:37.222Z",
-  "lastUpdated": "2020-04-30T15:23:44.766Z"
+  "createdOn": "2020-04-30T15:23:36.750Z",
+  "lastUpdated": "2020-04-30T16:18:06.258Z"
 }
