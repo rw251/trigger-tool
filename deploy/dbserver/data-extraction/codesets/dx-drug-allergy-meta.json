@@ -1,0 +1,23 @@
+{
+  "includeTerms": [
+    "allergic reaction to drug",
+    "drug allergy",
+    "anticoagulant allergy",
+    "apixaban allergy",
+    "rivaroxaban allergy",
+    "ticagrelor allergy",
+    "prasugrel allergy",
+    "aliskiren allergy"
+  ],
+  "excludeTerms": [
+    "h/o",
+    "personal history"
+  ],
+  "terminology": "Readv2",
+  "createdBy": {
+    "name": "Richard Williams",
+    "email": "1234richardwilliams@gmail.com"
+  },
+  "createdOn": "2020-04-30T15:23:37.222Z",
+  "lastUpdated": "2020-04-30T15:23:44.766Z"
+}
