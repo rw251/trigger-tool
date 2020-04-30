@@ -21,9 +21,10 @@ group by gpcode;
 --Get results
 PRINT 'Report date: 2020-04-30'
 PRINT 'EHR,GPCode, PracticeName, PracticeListSize, Events, Patients'
-select ehr, a.gpcode, practiceName, practiceListSize, ISNULL(a.num, 0) as occurances, ISNULL(b.num, 0) as patients
+select ehr, e.gpcode, practiceName, practiceListSize, ISNULL(e.num, 0) as occurances, ISNULL(b.num, 0) as patients
 from practiceDetails d
 left outer join #EventsPerPractice e on d.practiceId COLLATE Latin1_General_100_CI_AI = e.gpcode
 left outer join #PatientsPerPractice b on d.practiceId COLLATE Latin1_General_100_CI_AI = b.gpcode
 left outer join practiceListSizes pl on pl.practiceId = d.practiceId
+where e.gpcode is not null
 order by d.practiceId
