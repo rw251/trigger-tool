@@ -10,7 +10,7 @@ WHERE (
 		)
 	)
 	OR
-	ReadCode = {{CODESET:HaemoglobinVeryLow}}
+	ReadCode in ({{CODESET:HaemoglobinVeryLow}})
 )
 AND EntryDate > '{{REPORT_DATE_MINUS_3_MONTHS}}'
 AND EntryDate <= '{{REPORT_DATE}}'

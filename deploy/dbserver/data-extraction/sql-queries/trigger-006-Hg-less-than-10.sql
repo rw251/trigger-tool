@@ -10,7 +10,7 @@ WHERE (
 		)
 	)
 	OR
-	ReadCode = '4234.00','4234.'
+	ReadCode in ('4234.00','4234.')
 )
 AND EntryDate > '2020-02-01'
 AND EntryDate <= '2020-05-01'
