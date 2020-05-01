@@ -1,0 +1,49 @@
+{
+  "includeTerms": [
+    "haemoglobin",
+    "hb estimation"
+  ],
+  "excludeTerms": [
+    "variant",
+    "genotype",
+    "carrier",
+    "o level",
+    "sawara level",
+    "lepore level",
+    "d iran level",
+    "j level",
+    "g level",
+    "e level",
+    "d level",
+    "c level",
+    "unstable haemoglobin level",
+    "s level",
+    "electrophoresis",
+    "s estimation",
+    "a2",
+    "haemoglobin f",
+    "haemoglobin a",
+    "mean",
+    "glycated haemoglobin",
+    "h inclusion",
+    "high",
+    "normal",
+    "sample sent",
+    "requested",
+    "not estimated",
+    "trait",
+    "disease",
+    "hereditary",
+    "glycosylated haemoglobin",
+    "excluded",
+    "test",
+    "reticulocyte haemoglobin"
+  ],
+  "terminology": "Readv2",
+  "createdBy": {
+    "name": "Richard Williams",
+    "email": "1234richardwilliams@gmail.com"
+  },
+  "createdOn": "2020-05-01T09:47:49.444Z",
+  "lastUpdated": "2020-05-01T09:47:49.444Z"
+}
