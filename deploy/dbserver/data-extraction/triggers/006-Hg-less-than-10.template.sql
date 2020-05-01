@@ -3,17 +3,17 @@ SET NOCOUNT ON;
 
 SELECT PatID, EntryDate INTO #LowHb FROM SIR_ALL_Records
 WHERE (
-	(ReadCode in ('423..','4235.') AND 
+	(ReadCode in ({{CODESET:HaemoglobinLevel}}) AND 
 		(
 			( CodeValue IS NOT NULL AND CodeValue > 0 AND CodeValue <10) OR
 			( CodeValue IS NOT NULL AND CodeValue > 20 AND CodeValue <100)
 		)
 	)
 	OR
-	ReadCode = '4234.'
+	ReadCode = {{CODESET:HaemoglobinVeryLow}}
 )
-AND EntryDate > '2020-01-30'
-AND EntryDate <= '2020-04-30'
+AND EntryDate > '{{REPORT_DATE_MINUS_3_MONTHS}}'
+AND EntryDate <= '{{REPORT_DATE}}'
 
 --Number of time this happens per practice
 select gpcode, count(*) as num INTO #EventsPerPractice from #LowHb e INNER JOIN patients p on p.patid = e.PatID
@@ -24,7 +24,7 @@ select gpcode, count(*) as num INTO #PatientsPerPractice from patients p inner j
 group by gpcode;
 
 --Get results
-PRINT 'Report date: 2020-04-30'
+PRINT 'Report date: {{REPORT_DATE}}'
 PRINT 'EHR,GPCode, PracticeName, PracticeListSize, Events, Patients'
 select ehr, e.gpcode, practiceName, practiceListSize, ISNULL(e.num, 0) as occurances, ISNULL(b.num, 0) as patients
 from practiceDetails d

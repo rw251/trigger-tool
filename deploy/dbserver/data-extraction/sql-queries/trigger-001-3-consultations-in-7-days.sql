@@ -3,8 +3,8 @@ SET NOCOUNT ON;
 
 --Get all encounters in the last 3 months
 SELECT PatID, EntryDate INTO #Encounters FROM SIR_ALL_Records
-WHERE EntryDate > '2020-01-30'
-AND EntryDate <= '2020-04-30'
+WHERE EntryDate > '2020-02-01'
+AND EntryDate <= '2020-05-01'
 AND ReadCode = '~ENCT' 
 AND LOWER(Rubric) LIKE '%consultation%'
 AND Rubric NOT LIKE 'Non%'
@@ -82,7 +82,7 @@ select gpcode, count(*) as num INTO #Patients7PerPractice from patients p inner 
 group by gpcode;
 
 --Get results
-PRINT 'Report date: 2020-04-30'
+PRINT 'Report date: 2020-05-01'
 PRINT 'EHR,GPCode, PracticeName, PracticeListSize, Evts-3-in-7, Pats-3-in-7, Evts-4-in-7, Pats-4-in-7, Evts-5-in-7, Pats-5-in-7, Evts-6-in-7, Pats-6-in-7, Evts-7-in-7, Pats-7-in-7'
 select ehr, a.gpcode, practiceName, practiceListSize, a.num as occurances, b.num as patients, ISNULL(e4.num,0) as events4, ISNULL(p4.num,0) as patients4, ISNULL(e5.num,0) as events5, ISNULL(p5.num,0) as patients5, ISNULL(e6.num,0) as events6, ISNULL(p6.num,0) as patients6, ISNULL(e7.num,0) as events7, ISNULL(p7.num,0) as patients7
 from #EncountersPerPractice a 

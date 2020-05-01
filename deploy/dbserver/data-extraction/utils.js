@@ -43,8 +43,10 @@ exports.writeHTML = () => writeFileSync(join(__dirname, 'output', 'results.html'
 
 const processDataFile = (filename) => {
   const trigger = filename.replace(/trigger-[0-9]{3}-/, '').split('.')[0];
+  const file = readFileSync(join(__dirname, 'data', filename), 'utf8');
+  if(file.length < 10) return;
   output[trigger] = { body: [] };
-  readFileSync(join(__dirname, 'data', filename), 'utf8')
+  file
     .split('\n')
     .forEach((line, i) => {
       if(i === 0) {
